@@ -26,6 +26,9 @@ Route::get('sentianal/dataTable', 'DataController@sentianalTable');
 Route::get('param/dataTable', 'DataController@paramTable');
 Route::get('svm/dataTable', 'DataController@svmTable');
 
+Route::get('svm/model', 'DataController@svmModel');
+Route::get('svm/train', 'DataController@svmTrain');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

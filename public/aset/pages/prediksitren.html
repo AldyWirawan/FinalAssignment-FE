@@ -2,6 +2,8 @@
 	<div class="col-md-12">
 		<h1 class="text-center" style="margin-bottom: 40px">Data Historis</h1>
 
+		<a id="model" class="btn btn-primary pull-left">Bentuk Data Model</a>
+		<a id="train" style="margin-left: 10px" class="btn btn-success pull-left">Latih Model</a>
 		<br><br>
 		<div class="table-responsive">
 			<table id="data" class="table table-condensed table-bordered table-striped">
@@ -36,6 +38,26 @@
 			serverSide: true,
 			processing: true,
 			ajax: 'svm/dataTable',
+		});
+
+		$('#model').click( function () {
+			$.ajax({
+           		type: "GET",
+           		url: "svm/model",
+           		success: function(){
+                	alert("data model berhasil dibuat!");
+           		}
+        	});
+		});
+
+		$('#train').click( function () {
+			$.ajax({
+           		type: "GET",
+           		url: "svm/train",
+           		success: function(){
+                	alert("data latih telah berhasil membentuk model!");
+           		}
+        	});
 		});
 		
 	})

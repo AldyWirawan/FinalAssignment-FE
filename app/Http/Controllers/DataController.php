@@ -46,4 +46,17 @@ class DataController extends Controller {
 		$SVMs = SVM::select(['date', 'SMA520', 'SMA550', 'SMA1020', 'SMA1050', 'SMA520P', 'SMA550P', 'SMA1020P', 'SMA1050P', 'pos', 'neg', 'label']);
 		return Datatables::of($SVMs)->make();
 	}
+
+	public function svmModel()
+	{
+		$str = "java -jar " . public_path() . "/aset/jar/SVM.jar";
+		exec($str);
+	}
+
+		public function svmTrain()
+	{
+		$str = "java -jar " . public_path() . "/aset/jar/svmtrain.jar SVMData.data";
+		exec($str);
+	}
+
 }
