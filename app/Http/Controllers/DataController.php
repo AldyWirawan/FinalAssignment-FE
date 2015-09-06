@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\DataHistoris;
 use App\DataTwitter;
 use App\SMA;
+use App\SentiAnal;
 use App\SVM;
 
 use Illuminate\Http\Request;
@@ -33,7 +34,8 @@ class DataController extends Controller {
 
 	public function sentianalTable()
 	{
-
+		$sentianals = SentiAnal::select(['id', 'date', 'seg', 'pos', 'neg']);
+		return Datatables::of($sentianals)->make();
 	}
 
 	public function paramTable()
@@ -43,7 +45,7 @@ class DataController extends Controller {
 
 	public function svmTable()
 	{
-		$SVMs = SVM::select(['date', 'SMA520', 'SMA550', 'SMA1020', 'SMA1050', 'SMA520P', 'SMA550P', 'SMA1020P', 'SMA1050P', 'pos', 'neg', 'label']);
+		$SVMs = SVM::select(['id', 'SMA520', 'SMA550', 'SMA1020', 'SMA1050', 'SMA520P', 'SMA550P', 'SMA1020P', 'SMA1050P', 'pos', 'neg', 'label']);
 		return Datatables::of($SVMs)->make();
 	}
 

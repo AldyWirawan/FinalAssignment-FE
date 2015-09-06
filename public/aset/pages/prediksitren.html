@@ -1,15 +1,15 @@
 <div class="row">
 	<div class="col-md-12">
-		<h1 class="text-center" style="margin-bottom: 40px">Data Historis</h1>
+		<h1 class="text-center" style="margin-bottom: 15px">Data SVM</h1>
 
 		<a id="model" class="btn btn-primary pull-left">Bentuk Data Model</a>
-		<a id="train" style="margin-left: 10px" class="btn btn-success pull-left">Latih Model</a>
+		<a id="train" style="margin-left: 10px" class="btn btn-primary pull-left">Latih Model</a>
 		<br><br>
 		<div class="table-responsive">
-			<table id="data" class="table table-condensed table-bordered table-striped">
+			<table id="data" class="table display">
 				<thead>
 					<tr>
-						<th>Timestamp</th>
+						<th>id</th>
 						<th>SMA 5-20</th>
 						<th>SMA 5-50</th>
 						<th>SMA 10-20</th>
@@ -38,6 +38,13 @@
 			serverSide: true,
 			processing: true,
 			ajax: 'svm/dataTable',
+			columnDefs: [
+        		{
+        			targets:[ 0 ],
+        			visible: false,
+        			searchable: false,
+        		}
+        	]
 		});
 
 		$('#model').click( function () {

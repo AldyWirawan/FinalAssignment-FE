@@ -5,12 +5,15 @@ app.run(function(){
 });
 
 app.controller('NavController', function($scope){
-	$scope.halaman = "datahistoris";
+	$scope.halaman = "beranda";
 });
  
 //This will handle all of our routing
-app.config(function($routeProvider, $locationProvider){	
+app.config(function($routeProvider, $locationProvider){
 	$routeProvider.when('/',{
+		templateUrl:'aset/pages/beranda.html',
+	});
+	$routeProvider.when('/datahistoris',{
 		templateUrl:'aset/pages/datahistoris.html',
 	});
 	$routeProvider.when('/sma',{
