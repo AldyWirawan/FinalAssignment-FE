@@ -26,11 +26,11 @@
 
 <body ng-app="sistemprediksitrenApp">
 	<!-- navbar -->
-	<nav class="navbar navbar-inverse" ng-controller="NavController">
+	<nav class="navbar navbar-inverse navbar-fixed-top" ng-controller="NavController">
 		<div class="container-fluid">
 	    <!-- Brand and toggle get grouped for better mobile display -->
 		    <div class="navbar-header">
-		      <a class="navbar-brand" style="margin-left:15px; color:white" href="#" ng-click="halaman='beranda'">Sistem Prediksi Tren Saham</a>
+		      <a class="navbar-brand" style="margin-left:0px; color:white" href="#" ng-click="halaman='beranda'">Sistem Prediksi Tren Saham</a>
 		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 		        <span class="sr-only">Toggle navigation</span>
 		        <span class="icon-bar"></span>

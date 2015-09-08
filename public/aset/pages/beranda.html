@@ -1,18 +1,24 @@
-<script>
-$(document).ready(function(){
-	
-   	$("#div1").fadeIn();
-   	//$("#div2").fadeIn("slow");
-   	//$("#div3").fadeIn(3000);
-});
-</script>
 <div class="row">
 	<div class="col-md-12">
-		<div id="div1" hidden><h1> Prediksi Tren Dengan Analisis Sentimen Twitter </h1></div>
+		<div id="div1" hidden style="margin-top:249px"><h1> Prediksi Tren Dengan Analisis Sentimen Twitter </h1></div>
+		<div id="div2" hidden style="margin-top:150px"><h2> untuk memulai, klik tab data yang diinginkan </h2></div>
 	</div>
 </div>
 <style>
 h1 {
     text-align: center;
+    font-size: 300%;
+}
+h2 {
+	text-align: center;
 }
 </style>
+<script>
+$(document).ready(function(){
+	
+   	$("#div1").fadeIn(1000);
+   	$("#div2").delay(1000).fadeIn(1000);
+
+});
+
+</script>
