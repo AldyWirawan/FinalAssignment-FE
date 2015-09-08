@@ -25,8 +25,8 @@ app.config(function($routeProvider, $locationProvider){
 	$routeProvider.when('/sentianal',{
 		templateUrl:'aset/pages/sentianal.html',
 	});
-	$routeProvider.when('/paramsvm', {
-		templateUrl:'aset/pages/paramsvm.html',
+	$routeProvider.when('/datamodel', {
+		templateUrl:'aset/pages/datamodel.html',
 	});
 	$routeProvider.when('/prediksitren', {
 		templateUrl:'aset/pages/prediksitren.html',
