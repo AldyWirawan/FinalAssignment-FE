@@ -7,6 +7,7 @@ use App\DataTwitter;
 use App\SMA;
 use App\SentiAnal;
 use App\SVM;
+use App\SVMuji;
 
 use Illuminate\Http\Request;
 
@@ -38,15 +39,16 @@ class DataController extends Controller {
 		return Datatables::of($sentianals)->make();
 	}
 
-	public function paramTable()
-	{
-
-	}
-
 	public function svmTable()
 	{
 		$SVMs = SVM::select(['id', 'SMA520', 'SMA550', 'SMA1020', 'SMA1050', 'SMA520P', 'SMA550P', 'SMA1020P', 'SMA1050P', 'pos', 'neg', 'label']);
 		return Datatables::of($SVMs)->make();
+	}
+
+	public function svmujiTable()
+	{
+		$SVMujis = SVMuji::select(['id', 'SMA520', 'SMA550', 'SMA1020', 'SMA1050', 'SMA520P', 'SMA550P', 'SMA1020P', 'SMA1050P', 'pos', 'neg', 'label']);
+		return Datatables::of($SVMujis)->make();
 	}
 
 	public function svmModel()
@@ -55,10 +57,16 @@ class DataController extends Controller {
 		exec($str);
 	}
 
-		public function svmTrain()
+	public function svmTrain($t, $c, $g)
 	{
-		$str = "java -jar " . public_path() . "/aset/jar/svmtrain.jar SVMData.data";
+		$str = "java -jar " . public_path() . "/aset/jar/svmtrain.jar -t " . $t . " -c " . $c . " -g " . $g . " SVMData.data";
 		exec($str);
+	}
+
+	public function svmPredict() 
+	{
+		$str = "java -jar " . public_path() . "/aset/jar/svmpredict.jar SVMdataTest.data SVMData.data.model output";
+		return (exec($str));
 	}
 
 }

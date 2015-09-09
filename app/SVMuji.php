@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class SVM extends Model {
+class SVMuji extends Model {
 
-	protected $table = 'svmtrain';
+	protected $table = 'svmtest';
 
 }

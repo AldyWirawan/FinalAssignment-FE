@@ -25,9 +25,11 @@ Route::get('tweet/dataTable', 'DataController@tweetTable');
 Route::get('sentianal/dataTable', 'DataController@sentianalTable');
 Route::get('param/dataTable', 'DataController@paramTable');
 Route::get('svm/dataTable', 'DataController@svmTable');
+Route::get('svmuji/dataTable', 'DataController@svmujiTable');
 
 Route::get('svm/model', 'DataController@svmModel');
-Route::get('svm/train', 'DataController@svmTrain');
+Route::get('svm/train/{t}/{c}/{g}', 'DataController@svmTrain');
+Route::get('svm/predict', 'DataController@svmPredict');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
