@@ -19,6 +19,8 @@
 
 	<!-- js highcharts + datatables -->
 	<script type="text/javascript" src="aset/js/dataTables.min.js"></script>
+	<script type="text/javascript" src="aset/js/highcharts.js"></script>
+	<script type="text/javascript" src="aset/js/modules/exporting.js"></script>
 
 	<script src="aset/app.js"></script>
 

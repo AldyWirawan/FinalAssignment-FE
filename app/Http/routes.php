@@ -31,6 +31,8 @@ Route::get('svm/model', 'DataController@svmModel');
 Route::get('svm/train/{t}/{c}/{g}', 'DataController@svmTrain');
 Route::get('svm/predict', 'DataController@svmPredict');
 
+Route::get('json/uoutput', 'DataController@updateOutput');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

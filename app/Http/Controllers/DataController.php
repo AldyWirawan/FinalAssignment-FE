@@ -69,4 +69,10 @@ class DataController extends Controller {
 		return (exec($str));
 	}
 
+	public function updateOutput()
+	{
+		$str = "java -jar " . public_path() . "/aset/jar/JSON.jar";
+		exec($str);
+	}
+
 }

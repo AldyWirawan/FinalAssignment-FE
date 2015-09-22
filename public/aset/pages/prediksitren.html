@@ -1,8 +1,14 @@
+<head>
+<body>
+</body>
+</head>
+
 <div class="row">
 	<div class="col-md-12">
 		<h1 class="text-center" style="margin-bottom: 40px; margin-top: 114px">Data Uji SVM</h1>
 
 		<a id="predict" class="btn btn-primary pull-left">Prediksi Tren</a> 
+		<a id="uoutput" style="margin-left: 10px" class="btn btn-primary pull-left">Update Output</a> 
 
 		<br><br>
 
@@ -10,26 +16,7 @@
 
 		<br><br><br>
 
-		<div class="table-responsive">
-			<table id="data" class="table display">
-				<thead>
-					<tr>
-						<th>id</th>
-						<th>SMA 520</th>
-						<th>SMA 550</th>
-						<th>SMA 1020</th>
-						<th>SMA 1050</th>
-						<th>SMA 520P</th>
-						<th>SMA 550P</th>
-						<th>SMA 1020P</th>
-						<th>SMA 1050P</th>
-						<th>Positif</th>
-						<th>Negatif</th>
-						<th>Label</th>
-					</tr>
-				</thead>
-			</table>
-		</div>
+		<div id="container"> </div>
 	</div>
 </div>
 
@@ -39,18 +26,89 @@
 
 	$(document).ready(function() {
 
-		$('#data').DataTable( {
-			serverSide: true,
-			processing: true,
-			ajax: 'svmuji/dataTable',
-			columnDefs: [
-        		{
-        			targets:[ 0 ],
-        			visible: false,
-        			searchable: false,
-        		}
-        	]
-		});
+		$.getJSON('JSON.txt', function (data) {
+
+			var processed_json = new Array();
+			$.map(data, function (obj, i) {
+    			processed_json.push({x: parseInt(obj.c),y: parseFloat(obj.p),l : parseInt(obj.l), pr : parseInt(obj.pr) });
+			});
+
+			console.log(processed_json);
+
+	        $('#container').highcharts({
+	            chart: {
+	                zoomType: 'x'
+	            },
+	            title: {
+	                text: ''
+	            },
+	            subtitle: {
+	                text: document.ontouchstart === undefined ?
+	                        'Klik dan seret kursor untuk melakukan zoom in' : 'Pinch the chart to zoom in'
+	            },
+	            xAxis: {
+
+	            },
+	            yAxis: {
+	                title: {
+	                    text: 'Harga'
+	                }
+	            },
+	            legend: {
+	                enabled: false
+	            },
+	            tooltip: {
+	            	useHTML: true,
+	                formatter: function() {
+	                	var red = '<img src="red.png" title="" alt="" border="0" height="16" width="16">';
+	                	var green = '<img src="green.png" title="" alt="" border="0" height="16" width="16">';
+	                	var newl;
+	                	var newpr;
+	                	if (this.point.l > 0)
+	                		newl = green;
+	                	else
+	                		newl = red;
+	                	if (this.point.pr > 0)
+	                		newpr = green;
+	                	else
+	                		newpr = red;
+	                    return 'Harga :<b>' + this.y + '</b> <br>Label :' + newl +'<br>Prediksi :' + newpr;
+	                }
+	            },
+	            plotOptions: {
+	                area: {
+	                    fillColor: {
+	                        linearGradient: {
+	                            x1: 0,
+	                            y1: 0,
+	                            x2: 0,
+	                            y2: 1
+	                        },
+	                        stops: [
+	                            [0, Highcharts.getOptions().colors[0]],
+	                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+	                        ]
+	                    },
+	                    marker: {
+	                        radius: 2
+	                    },
+	                    lineWidth: 1,
+	                    states: {
+	                        hover: {
+	                            lineWidth: 1
+	                        }
+	                    },
+	                    threshold: null
+	                }
+	            },
+
+	            series: [{
+	                type: 'line',
+	                name: 'Prediksi Tren Saham',
+	                data: processed_json
+	            }]
+	        });
+	    });
 
 		$('#predict').click( function () {
 			$.ajax({
@@ -60,6 +118,17 @@
                 	alert("prediksi selesai!");
                 	acc = document.getElementById("acc");
 					acc.value = result;
+           		}
+        	});
+		});
+
+		$('#uoutput').click( function () {
+			$.ajax({
+           		type: "GET",
+           		url: "json/uoutput",
+           		success: function(result){
+                	alert("updated!");
+                	location.reload();
            		}
         	});
 		});

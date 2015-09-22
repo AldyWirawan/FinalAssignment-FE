@@ -1,0 +1,68 @@
+<div class="row">
+	<div class="col-md-12">
+		<h1 class="text-center" style="margin-bottom: 40px; margin-top: 114px">Data Uji SVM</h1>
+
+		<a id="predict" class="btn btn-primary pull-left">Prediksi Tren</a> 
+
+		<br><br>
+
+		<input class="pull-left col-md-5" style="margin-top:15px" type="text" id="acc" value="Akurasi" disabled>
+
+		<br><br><br>
+
+		<div class="table-responsive">
+			<table id="data" class="table display">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>SMA 520</th>
+						<th>SMA 550</th>
+						<th>SMA 1020</th>
+						<th>SMA 1050</th>
+						<th>SMA 520P</th>
+						<th>SMA 550P</th>
+						<th>SMA 1020P</th>
+						<th>SMA 1050P</th>
+						<th>Positif</th>
+						<th>Negatif</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	var editor; // use a global for the submit and return data rendering in the examples
+
+	$(document).ready(function() {
+
+		$('#data').DataTable( {
+			serverSide: true,
+			processing: true,
+			ajax: 'svmuji/dataTable',
+			columnDefs: [
+        		{
+        			targets:[ 0 ],
+        			visible: false,
+        			searchable: false,
+        		}
+        	]
+		});
+
+		$('#predict').click( function () {
+			$.ajax({
+           		type: "GET",
+           		url: "svm/predict",
+           		success: function(result){
+                	alert("prediksi selesai!");
+                	acc = document.getElementById("acc");
+					acc.value = result;
+           		}
+        	});
+		});
+		
+	})
+</script>
